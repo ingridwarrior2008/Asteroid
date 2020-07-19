@@ -13,51 +13,49 @@
 UCLASS()
 class ASTEROIDS_API ASpaceshipCharacter : public ACharacter, public IDamageInterface
 {
-	GENERATED_BODY()
+    GENERATED_BODY()
 
 public:
-	
-	ASpaceshipCharacter();
-	virtual void Tick(float DeltaTime) override;
-	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
-	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
-	void OnTakeDamage(int Damage);
-	virtual void OnTakeDamage_Implementation(int Damage) override;
+    ASpaceshipCharacter();
+    virtual void Tick(float DeltaTime) override;
+    virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+    virtual void OnTakeDamage_Implementation(int Damage) override;
 
-	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
-	void OnPlayerDied();
+    UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
+    void OnPlayerDied();
 
-	UFUNCTION(BlueprintCallable)
-	void YawRotationCharacter(float AxisValue);
+    UFUNCTION(BlueprintCallable)
+    void YawRotationCharacter(float AxisValue);
 
-	UFUNCTION(BlueprintCallable)
-	void MoveForwardCharacter(float AxisValue);
+    UFUNCTION(BlueprintCallable)
+    void MoveForwardCharacter(float AxisValue);
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = SpaceShip)
-	float RotationSpeed;
+    UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = SpaceShip)
+    float RotationSpeed;
 
-	UPROPERTY(BlueprintReadWrite, Category = SpaceShip)
-	bool bCanStartShooting;
+    UPROPERTY(BlueprintReadWrite, Category = SpaceShip)
+    bool bCanStartShooting;
 
-	UPROPERTY(EditAnywhere, Category = SpaceShip)
-	int MaxHealth;
+    UPROPERTY(EditAnywhere, Category = SpaceShip)
+    int MaxHealth;
 
-	UPROPERTY(BlueprintReadWrite, Category = SpaceShip)
+    UPROPERTY(BlueprintReadWrite, Category = SpaceShip)
     int CurrentHealth;
-	
+
 protected:
-	
-	virtual void BeginPlay() override;
-	
+
+    virtual void BeginPlay() override;
+
 private:
 
-	void Init();
-	void TakeSpaceshipDamage(int Damage);
-	
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = SpaceShip, meta = (AllowPrivateAccess = "true"))
-	UStaticMeshComponent* SpaceShipMeshComponent;
-	
-	UPROPERTY()
-	UWorld *World;
+    void Init();
+    void ReceiveDamage(const int Damage);
+    float GetCurrentHealth() const { return  CurrentHealth; }
+
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = SpaceShip, meta = (AllowPrivateAccess = "true"))
+    UStaticMeshComponent* SpaceShipMeshComponent;
+
+    UPROPERTY()
+    UWorld* World;
 };

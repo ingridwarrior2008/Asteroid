@@ -10,7 +10,7 @@
 UINTERFACE(MinimalAPI)
 class UDamageInterface : public UInterface
 {
-	GENERATED_BODY()
+    GENERATED_BODY()
 };
 
 /**
@@ -18,10 +18,10 @@ class UDamageInterface : public UInterface
  */
 class ASTEROIDS_API IDamageInterface
 {
-	GENERATED_BODY()
+    GENERATED_BODY()
 
 public:
-	
-	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
+
+    UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
     void OnTakeDamage(int Damage);
 };
